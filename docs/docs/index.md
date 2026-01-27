@@ -67,7 +67,7 @@ Or jump straight to the [Quick Start Guide](/guides/quickstart) to run your firs
 
 ## Requirements
 
-- **API Access**: Gopher Credits ([get started](https://gotrader.gopher-ai.com/settings)) or your own OpenRouter/OpenAI key
+- **API Access**: **Gopher Key** (recommended - [get started](https://gotrader.gopher-ai.com/settings)) or bring your own OpenRouter/OpenAI key
 - **Internet**: Connection to cloud data service
 - **System**: macOS 11+, Windows 10+, or Linux (CLI only)
 
