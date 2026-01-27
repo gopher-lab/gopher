@@ -268,22 +268,71 @@ gopher evolve --resume ~/Documents/Gopher/sessions/agent_20250127_143052.session
 
 ## Live Trading
 
-Once you've found profitable strategies, deploy them to live trading:
+Once you've found profitable strategies, deploy them to Hyperliquid.
 
-### Paper Trading (Testnet)
+### 1. Get Your Hyperliquid Private Key
+
+1. Go to [Hyperliquid](https://app.hyperliquid.xyz/)
+2. Connect your wallet
+3. Go to **Settings** → **API Wallet**
+4. Click **Generate API Wallet**
+5. Copy the private key (starts with `0x...`)
+
+:::warning Security
+Never share your private key! Store it securely and never commit it to version control.
+:::
+
+### 2. Configure via Setup Wizard
+
+The easiest way to configure live trading:
+
+```bash
+gopher setup --mode live
+```
+
+The wizard will:
+- Ask for your private key environment variable name (default: `TRADER_PRIVATE_KEY`)
+- Create a `traders.yaml` configuration file
+- Set up your trading parameters
+
+### 3. Set Your Private Key
+
+Set the environment variable in your shell:
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export TRADER_PRIVATE_KEY='your-private-key-here'
+```
+
+Or create a `.env` file (add to `.gitignore`!):
+
+```bash
+# .env
+HL_PRIVATE_KEY=your-private-key-here
+OPENROUTER_API_KEY=your-openrouter-key
+```
+
+### 4. Paper Trading (Testnet)
+
+Test your strategy without risking real funds:
 
 ```bash
 gopher live --config traders.yaml --mode paper
 ```
 
-### Live Trading (Mainnet)
+### 5. Live Trading (Mainnet)
+
+Deploy with real funds:
 
 ```bash
 gopher live --config traders.yaml --mode live
 ```
 
-:::warning
-Live trading uses real funds! Always test thoroughly with paper trading first.
+:::danger Real Money
+Live trading uses **real funds** on Hyperliquid mainnet! Always:
+- Test thoroughly with paper trading first
+- Start with small capital
+- Monitor your positions closely
 :::
 
 ## Query Trade History
