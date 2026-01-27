@@ -75,4 +75,4 @@ Or jump straight to the [Quick Start Guide](/guides/quickstart) to run your firs
 
 ---
 
-**Gopher** is developed by [Moon Laboratories Inc](https://moonlaboratories.com).
+**Gopher** is developed by [Gopher AI](https://gotrader.gopher-ai.com).

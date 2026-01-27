@@ -110,7 +110,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Moon Laboratories Inc. All rights reserved.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Gopher AI. All rights reserved.`,
       },
       prism: {
         theme: require('prism-react-renderer').themes.github,

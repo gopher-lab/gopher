@@ -102,4 +102,4 @@ docs/
 
 ## License
 
-Copyright © 2026 Moon Laboratories Inc. All rights reserved.
+Copyright © 2026 Gopher AI. All rights reserved.

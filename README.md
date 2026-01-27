@@ -2,7 +2,7 @@
 
 AI-powered backtesting and strategy evolution for cryptocurrency trading.
 
-Developed by [Moon Laboratories Inc](https://moonlaboratories.com).
+Developed by [Gopher AI](https://gotrader.gopher-ai.com).
 
 ---
 
@@ -93,12 +93,12 @@ Full documentation available at: [docs.moonlaboratories.com/gopher](https://docs
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/gopher-lab/gopher/issues)
-- **Email**: support@moonlaboratories.com
+- **Email**: hello@gopher-ai.com
 
 ---
 
 ## License
 
-Proprietary software. Copyright (c) 2026 Moon Laboratories Inc. All rights reserved.
+Proprietary software. Copyright (c) 2026 Gopher AI. All rights reserved.
 
 See [LICENSE](./LICENSE) for full terms.
