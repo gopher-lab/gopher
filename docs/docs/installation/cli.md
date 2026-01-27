@@ -28,10 +28,23 @@ Go to the [Releases page](https://github.com/gopher-lab/gopher/releases) and dow
 
 ### 1. Download and extract
 
+**Option A: One-liner install script (recommended)**
+
 ```bash
-# Example for macOS Apple Silicon
-curl -L -o gopher.tar.gz https://github.com/gopher-lab/gopher/releases/latest/download/gopher-0.3.0-darwin-arm64.tar.gz
-tar -xzf gopher.tar.gz
+# Detects your platform and installs the latest version
+curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/install.sh | bash
+```
+
+**Option B: Manual download**
+
+Visit the [Releases page](https://github.com/gopher-lab/gopher/releases), download the appropriate file for your platform, then:
+
+```bash
+# Extract (replace FILENAME with your downloaded file)
+tar -xzf gopher-*-darwin-arm64.tar.gz   # macOS Apple Silicon
+tar -xzf gopher-*-darwin-amd64.tar.gz   # macOS Intel
+tar -xzf gopher-*-linux-amd64.tar.gz    # Linux
+
 chmod +x gopher
 ```
 
