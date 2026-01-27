@@ -16,9 +16,9 @@ Download and install Gopher on your Mac.
 ## Download
 
 1. Go to the [Releases page](https://github.com/gopher-lab/gopher/releases)
-2. Download the latest `Gopher-X.X.X-universal.dmg` file
+2. Download the latest `Gopher-X.X.X-macOS.dmg` file
 
-The universal build works on both Apple Silicon and Intel Macs.
+The macOS build is a universal binary that works on both Apple Silicon (M1/M2/M3) and Intel Macs.
 
 ## Install
 

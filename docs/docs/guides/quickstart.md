@@ -15,7 +15,7 @@ Before you begin:
 
 ## Step 1: Get API Access
 
-Gopher uses AI models to generate and evolve trading strategies. Choose one of these options:
+Gopher uses AI models to generate and evaluate trading strategies. Choose one of these options:
 
 ### Option A: Gopher Credits (Easiest)
 
@@ -52,7 +52,15 @@ Use your own API key from a provider:
 
 ### CLI
 
-Set your credentials as an environment variable:
+Run the interactive setup wizard:
+
+```bash
+gopher setup
+```
+
+The wizard guides you through all configuration options interactively.
+
+Alternatively, set environment variables directly:
 
 ```bash
 # Gopher Credits (recommended)
@@ -71,20 +79,24 @@ In **Settings** > **Models**, select:
 
 | Setting | Recommended | Purpose |
 |---------|-------------|---------|
-| **Loop Model** | qwen/qwen3-max | Primary model for strategy generation |
+| **Loop Model** | qwen/qwen3-max | Primary model for strategy generation/evolution |
 | **Backtest Model** | qwen/qwen3-vl-8b-instruct | Faster model for trade decisions |
 
 The defaults work well for most users.
 
-## Step 4: Run Your First Evolution
+## Step 4: Run Strategy Evolution
+
+The main feature of Gopher is **autonomous strategy evolution** - an AI-powered process that iteratively discovers and refines trading strategies.
 
 ### Desktop App
 
 1. Go to the **Evolution** tab
 2. Configure your run:
    - **Asset**: Select BTC (or another asset)
-   - **Date Range**: Last 14 days is a good starting point
+   - **Date Range**: Last 7-14 days is a good starting point
    - **Intervals**: Keep defaults (15m, 1h, 4h)
+   - **Iterations**: Start with 50 for quick runs
+   - **Strategy Prompt** (optional): Give guidance like "Focus on momentum breakouts"
 3. Click **Start Evolution**
 
 ### CLI
@@ -94,75 +106,140 @@ gopher evolve \
   --asset BTC \
   --start 2025-01-01 \
   --end 2025-01-25 \
-  --intervals 15m,1h,4h \
-  --iterations 25
+  --iterations 50 \
+  --prompt "Focus on momentum breakouts"
 ```
 
-## What Happens Next
+## What Happens During Evolution
 
-Gopher will now:
+Gopher's evolution loop:
 
-1. **Generate** initial trading strategies using AI
-2. **Backtest** each strategy against historical data
-3. **Analyze** performance (PnL, Sharpe ratio, win rate)
-4. **Evolve** strategies based on results
-5. **Repeat** until max iterations reached
+1. **Generates** an initial trading strategy using the Loop Model
+2. **Backtests** the strategy against historical data
+3. **Analyzes** performance metrics (PnL, Sharpe, win rate)
+4. **Evolves** the strategy based on results and learnings
+5. **Repeats** until max iterations reached, finding the best strategies
 
 Watch the progress in real-time:
 
 ```
-[GOPHER] Asset: BTC
-[GOPHER] Date range: 2025-01-11 to 2025-01-25
-[GOPHER] Intervals: [15m, 1h, 4h]
+╔═══════════════════════════════════════════════════════════╗
+║                  Strategy Evolution                        ║
+╚═══════════════════════════════════════════════════════════╝
+Asset:      BTC
+Period:     2025-01-01 to 2025-01-25
+Intervals:  [15m 1h 4h]
+Iterations: 50
+Leverage:   10.0x
 
-Iteration 1:
-  Strategy: "Follow momentum breakouts with RSI confirmation"
-  PnL: +12.5% | Win Rate: 58% | Trades: 24
-  
-Iteration 2:
-  Strategy: "Mean reversion with Bollinger Band squeeze"
-  PnL: +8.3% | Win Rate: 52% | Trades: 31
-  
-Iteration 3:
-  Strategy: "Trend following with EMA crossover and volume"
-  PnL: +18.7% | Win Rate: 61% | Trades: 19  ← Best so far!
+Starting evolution...
+
+[1/50] 2% complete
+  → Backtest: PnL +3.45% | WR 54.2% | 18 trades
+[2/50] 4% complete
+  → Backtest: PnL +5.12% | WR 58.3% | 22 trades
+...
+
+═══════════════════════════════════════════════════════════
+                    EVOLUTION COMPLETE
+═══════════════════════════════════════════════════════════
+Total Iterations: 50
+Best PnL:         12.45%
+Best Win Rate:    65.0%
+Best Sharpe:      1.92
+Session ID:       agent_20250127_143052
 ```
 
-## Monitor Progress
+## Step 5: Validate with Monte Carlo
 
-### Desktop App
-
-- **Live Results Table**: Shows each backtest iteration with metrics
-- **Performance Chart**: Visualizes PnL progression over iterations
-- **Activity Log**: Detailed logs of AI decisions and reasoning
+Once you've found a good strategy, validate it statistically:
 
 ### CLI
 
-Results are printed to stdout and saved to JSON files in the output directory.
-
-## Review Results
+```bash
+gopher montecarlo \
+  --asset BTC \
+  --prompt "Your evolved strategy prompt here" \
+  --runs 50
+```
 
 ### Desktop App
 
-1. Click **Stop** when satisfied, or wait for completion
-2. Go to the **History** tab
-3. Select the session to view all results
-4. Click any result to see:
-   - Full strategy description
-   - Trade history
-   - Performance metrics
-   - Entry/exit details
+1. Go to the **Monte Carlo** tab
+2. Select your best strategy from the evolution results
+3. Set number of runs (50-100 recommended)
+4. Click **Run Validation**
+
+Monte Carlo runs the same strategy multiple times to assess consistency and robustness.
+
+## Step 6: Run Single Backtests
+
+You can also run individual backtests without evolution:
 
 ### CLI
 
-Results are saved to:
-
+```bash
+gopher backtest \
+  --asset BTC \
+  --prompt "Follow momentum breakouts with RSI confirmation" \
+  --start 2025-01-01 \
+  --end 2025-01-25 \
+  --intervals 15m,1h,4h
 ```
-results/
-├── session_2025-01-27_143052/
-│   ├── session.json
-│   ├── backtest_001.json
-│   └── best_strategy.json
+
+### Desktop App
+
+1. Go to the **Backtest** tab
+2. Enter your strategy prompt
+3. Configure date range and intervals
+4. Click **Run Backtest**
+
+## Utility Commands
+
+### Check Data Coverage
+
+Before running backtests, verify data availability:
+
+```bash
+# Check coverage for an asset
+gopher coverage --asset BTC
+
+# Find optimal date range
+gopher coverage --asset BTC --optimal
+```
+
+### List Available Assets
+
+See all tradable assets:
+
+```bash
+gopher assets
+
+# Top assets by volume
+gopher assets --top 20
+```
+
+### View History
+
+Review past backtests and sessions:
+
+```bash
+# List recent backtests
+gopher history
+
+# Show resumable evolution sessions
+gopher history --resumable
+
+# Group by session
+gopher history --grouped
+```
+
+### Resume Interrupted Evolution
+
+If evolution was interrupted, resume it:
+
+```bash
+gopher evolve --resume ~/Documents/Gopher/sessions/agent_20250127_143052.session.json
 ```
 
 ## Tips for Better Results
@@ -181,12 +258,78 @@ results/
 - Check the coverage indicator (aim for >90%)
 - Longer date ranges = more reliable backtests
 - Some assets have more historical data than others
+- Use `gopher coverage --asset ASSET --optimal` to find the best dates
 
 ### Start Conservative
 
 - Use default risk settings initially (2% risk, 10x leverage)
-- Allow 25-50 iterations for meaningful evolution
 - Multiple timeframes (e.g., 15m + 1h + 4h) often work better than single
+- Test with paper trading before going live
+
+## Live Trading
+
+Once you've found profitable strategies, deploy them to live trading:
+
+### Paper Trading (Testnet)
+
+```bash
+gopher live --config traders.yaml --mode paper
+```
+
+### Live Trading (Mainnet)
+
+```bash
+gopher live --config traders.yaml --mode live
+```
+
+:::warning
+Live trading uses real funds! Always test thoroughly with paper trading first.
+:::
+
+## Query Trade History
+
+View your trading history:
+
+```bash
+# Table format
+gopher trades --limit 50
+
+# Filter by symbol
+gopher trades --symbol BTC --since 2025-01-01
+
+# JSON export
+gopher trades --json > trades.json
+```
+
+## Complete Workflow Example
+
+Here's a complete workflow from start to finish:
+
+```bash
+# 1. Setup (first time only)
+gopher setup
+
+# 2. Check available assets
+gopher assets --top 20
+
+# 3. Verify data coverage
+gopher coverage --asset BTC --optimal
+
+# 4. Run strategy evolution
+gopher evolve --asset BTC --start 2025-01-01 --end 2025-01-25 --iterations 50
+
+# 5. Validate the best strategy with Monte Carlo
+gopher montecarlo --asset BTC --prompt "Best strategy from evolution" --runs 100
+
+# 6. Review history
+gopher history --grouped
+
+# 7. Start paper trading
+gopher live --config traders.yaml --mode paper
+
+# 8. Monitor trades
+gopher trades --limit 20
+```
 
 ## Next Steps
 

@@ -11,6 +11,7 @@ The CLI is ideal for:
 - Automation and scripting
 - Integration with other tools
 - Users who prefer terminal workflows
+- **Full feature parity with the desktop app**
 
 ## Download
 
@@ -18,19 +19,19 @@ Go to the [Releases page](https://github.com/gopher-lab/gopher/releases) and dow
 
 | Platform | File |
 |----------|------|
-| macOS (Apple Silicon) | `gopher-cli-darwin-arm64` |
-| macOS (Intel) | `gopher-cli-darwin-amd64` |
-| Windows | `gopher-cli-windows-amd64.exe` |
-| Linux (x64) | `gopher-cli-linux-amd64` |
-| Linux (ARM64) | `gopher-cli-linux-arm64` |
+| macOS (Apple Silicon) | `gopher-{version}-darwin-arm64.tar.gz` |
+| macOS (Intel) | `gopher-{version}-darwin-amd64.tar.gz` |
+| Windows | `gopher-{version}-windows-amd64.zip` |
+| Linux (x64) | `gopher-{version}-linux-amd64.tar.gz` |
 
 ## macOS / Linux Setup
 
-### 1. Download and make executable
+### 1. Download and extract
 
 ```bash
 # Example for macOS Apple Silicon
-curl -L -o gopher https://github.com/gopher-lab/gopher/releases/latest/download/gopher-cli-darwin-arm64
+curl -L -o gopher.tar.gz https://github.com/gopher-lab/gopher/releases/latest/download/gopher-0.3.0-darwin-arm64.tar.gz
+tar -xzf gopher.tar.gz
 chmod +x gopher
 ```
 
@@ -63,15 +64,11 @@ Or right-click → Open in Finder.
 
 ## Windows Setup
 
-### 1. Download
+### 1. Download and extract
 
-Download `gopher-cli-windows-amd64.exe` from the Releases page.
+Download `gopher-{version}-windows-amd64.zip` from the Releases page and extract it.
 
-### 2. Rename (optional)
-
-Rename to `gopher.exe` for convenience.
-
-### 3. Add to PATH (optional)
+### 2. Add to PATH (optional)
 
 Add the directory containing `gopher.exe` to your system PATH:
 
@@ -80,20 +77,49 @@ Add the directory containing `gopher.exe` to your system PATH:
 3. Edit **Path** under User variables
 4. Add the directory containing `gopher.exe`
 
-### 4. Verify installation
+### 3. Verify installation
 
 ```powershell
 gopher.exe --version
 gopher.exe --help
 ```
 
+## Available Commands
+
+The Gopher CLI provides these commands with **full feature parity** to the desktop app:
+
+| Command | Description |
+|---------|-------------|
+| `gopher setup` | Interactive configuration wizard |
+| `gopher evolve` | **Autonomous strategy evolution** (the main feature!) |
+| `gopher backtest` | Run a single backtest with a strategy prompt |
+| `gopher montecarlo` | Monte Carlo strategy validation |
+| `gopher live` | Start live trading on Hyperliquid |
+| `gopher trades` | Query trade history from the database |
+| `gopher history` | View backtest history and sessions |
+| `gopher coverage` | Check data coverage for an asset |
+| `gopher assets` | List available trading assets |
+
+Run `gopher <command> --help` for detailed usage of each command.
+
 ## Configuration
 
-The CLI uses environment variables for configuration.
+### Interactive Setup (Recommended)
 
-### Required: API Access
+The easiest way to configure Gopher is with the interactive wizard:
 
-Choose one authentication method:
+```bash
+gopher setup
+```
+
+This guides you through:
+- Authentication (Gopher Key or OpenRouter)
+- Data source selection (cloud or local)
+- Mode selection (backtest, live trading, or both)
+
+### Environment Variables
+
+Alternatively, set environment variables directly:
 
 ```bash
 # Option 1: Gopher Credits (recommended - easiest)
@@ -102,132 +128,454 @@ export BART_GOPHER_CODE='gopher_your-key-here'
 
 # Option 2: OpenRouter
 export OPENROUTER_API_KEY='sk-or-v1-your-key-here'
-
-# Option 3: OpenAI
-export OPENAI_API_KEY='sk-your-key-here'
 ```
 
 **Gopher Credits** are the easiest option - no external API accounts needed. Purchase credits at [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings).
 
-### Optional: Database
-
-By default, Gopher uses the cloud data service. For a local database:
-
-```bash
-export DATABASE_URL='postgresql://user:pass@localhost:5432/data'
-```
-
 ## Basic Usage
 
-### Run a backtest
-
-```bash
-gopher backtest \
-  --asset BTC \
-  --start 2025-01-01 \
-  --end 2025-01-25 \
-  --intervals 15m,1h,4h \
-  --strategy "Follow momentum breakouts with RSI confirmation"
-```
-
-### Run evolution
+### Run strategy evolution
 
 ```bash
 gopher evolve \
   --asset BTC \
   --start 2025-01-01 \
   --end 2025-01-25 \
-  --intervals 15m,1h,4h \
-  --iterations 50
+  --iterations 50 \
+  --prompt "Focus on momentum breakouts"
 ```
 
-### List available assets
+### Run a single backtest
 
 ```bash
-gopher assets --top 20
+gopher backtest \
+  --asset BTC \
+  --prompt "Follow momentum breakouts with RSI confirmation" \
+  --start 2025-01-01 \
+  --end 2025-01-25 \
+  --intervals 15m,1h,4h
 ```
 
-### Check data coverage
+### Monte Carlo validation
 
 ```bash
-gopher coverage --asset BTC --intervals 15m,1h,4h
+gopher montecarlo \
+  --asset ETH \
+  --prompt "Mean reversion with Bollinger Bands" \
+  --runs 50
 ```
 
-## CLI Options
+### Start live trading (paper mode)
 
-### Global Options
+```bash
+gopher live --config traders.yaml --mode paper
+```
 
-| Flag | Description |
-|------|-------------|
-| `--help` | Show help message |
-| `--version` | Show version |
-| `--config FILE` | Path to config file |
-| `--verbose` | Enable verbose output |
+### Query trade history
 
-### Backtest Options
+```bash
+# Table format
+gopher trades --limit 50
+
+# JSON format
+gopher trades --symbol BTC --json
+```
+
+## Command Reference
+
+### `gopher setup`
+
+Interactive configuration wizard.
+
+```bash
+gopher setup [flags]
+```
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--asset` | Trading asset (e.g., BTC, ETH) | Required |
+| `--config-dir` | Override config output directory | `~/Documents/Gopher` |
+| `--mode` | Pre-select mode (backtest/live/both) | Interactive |
+| `--skip-validation` | Skip connection tests | `false` |
+
+### `gopher evolve`
+
+Run autonomous AI-powered strategy evolution. This is the primary feature that iteratively evolves trading strategies through backtesting.
+
+```bash
+gopher evolve --asset <ASSET> [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--asset` | Trading asset (e.g., BTC, ETH) | **Required** |
 | `--start` | Start date (YYYY-MM-DD) | 7 days ago |
 | `--end` | End date (YYYY-MM-DD) | Today |
-| `--intervals` | Timeframes (comma-separated) | 15m,1h,4h |
-| `--strategy` | Strategy prompt | Required |
-| `--model` | LLM model ID | qwen/qwen3-max |
+| `--intervals` | Candle intervals | `15m,1h,4h` |
+| `--prompt` | Strategy guidance prompt | None |
+| `--iterations` | Maximum iterations (1-200) | `50` |
+| `--leverage` | Trading leverage | `10` |
+| `--model` | LLM model for strategy evolution | `qwen/qwen3-max` |
+| `--backtest-model` | LLM model for backtest decisions | `qwen/qwen3-vl-8b-instruct` |
+| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--base-url` | LLM API base URL | OpenRouter |
+| `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
+| `--output` | Output directory for sessions | `~/Documents/Gopher/sessions` |
+| `--resume` | Resume a previous session | None |
+| `--json` | Output final results as JSON | `false` |
 
-### Evolution Options
+**Examples:**
+
+```bash
+# Basic evolution
+gopher evolve --asset BTC --start 2025-01-01 --end 2025-01-25
+
+# Extended evolution with more iterations
+gopher evolve --asset ETH --iterations 100 --leverage 5
+
+# Resume an interrupted session
+gopher evolve --resume ~/Documents/Gopher/sessions/agent_20250127_143052.session.json
+
+# Custom strategy guidance
+gopher evolve --asset SOL --prompt "Focus on volatility breakouts during Asian session"
+```
+
+### `gopher backtest`
+
+Run a single backtest simulation.
+
+```bash
+gopher backtest --asset <ASSET> --prompt <STRATEGY> [flags]
+```
 
 | Flag | Description | Default |
 |------|-------------|---------|
-| `--asset` | Trading asset | Required |
-| `--start` | Start date | 7 days ago |
-| `--end` | End date | Today |
-| `--intervals` | Timeframes | 15m,1h,4h |
-| `--iterations` | Max iterations | 50 |
-| `--model` | Loop model ID | qwen/qwen3-max |
-| `--output` | Output directory | ./results |
+| `--asset` | Trading asset (e.g., BTC, ETH) | **Required** |
+| `--prompt` | Strategy prompt | **Required** |
+| `--start` | Start date (YYYY-MM-DD) | 7 days ago |
+| `--end` | End date (YYYY-MM-DD) | Today |
+| `--intervals` | Candle intervals | `15m,1h,4h` |
+| `--leverage` | Trading leverage | `10` |
+| `--model` | LLM model for decisions | `qwen/qwen3-vl-8b-instruct` |
+| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--json` | Output results as JSON | `false` |
+| `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
+| `--output` | Output directory for results | `~/Documents/Gopher/sessions` |
 
-## Configuration File
-
-Create a config file for persistent settings:
-
-```yaml
-# ~/.gopher/config.yaml
-api_key: sk-or-v1-your-key-here
-provider: openrouter
-model: qwen/qwen3-max
-data_source: cloud
-
-defaults:
-  asset: BTC
-  intervals:
-    - 15m
-    - 1h
-    - 4h
-  iterations: 50
-```
-
-Use with:
+**Example:**
 
 ```bash
-gopher evolve --config ~/.gopher/config.yaml
+gopher backtest \
+  --asset ETH \
+  --prompt "Mean reversion strategy using Bollinger Bands" \
+  --start 2025-01-01 \
+  --end 2025-01-20 \
+  --intervals 1h,4h \
+  --leverage 5 \
+  --json
+```
+
+### `gopher montecarlo`
+
+Run Monte Carlo validation to statistically validate a trading strategy across multiple runs.
+
+```bash
+gopher montecarlo --asset <ASSET> --prompt <STRATEGY> [flags]
+```
+
+Alias: `gopher mc`
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--asset` | Trading asset (e.g., BTC, ETH) | **Required** |
+| `--prompt` | Strategy prompt | **Required** |
+| `--runs` | Number of Monte Carlo runs (10-500) | `100` |
+| `--start` | Start date (YYYY-MM-DD) | 7 days ago |
+| `--end` | End date (YYYY-MM-DD) | Today |
+| `--intervals` | Candle intervals | `15m,1h,4h` |
+| `--leverage` | Trading leverage | `10` |
+| `--model` | LLM model for decisions | `qwen/qwen3-vl-8b-instruct` |
+| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--base-url` | LLM API base URL | OpenRouter |
+| `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
+| `--json` | Output results as JSON | `false` |
+
+**Examples:**
+
+```bash
+# Basic Monte Carlo validation
+gopher montecarlo --asset BTC --prompt "Follow momentum breakouts" --runs 50
+
+# Comprehensive validation with 100 runs
+gopher mc --asset ETH --prompt "Mean reversion with Bollinger Bands" --runs 100 --json
+```
+
+**Output includes:**
+- Average PnL, win rate, Sharpe ratio across all runs
+- Best and worst performing runs
+- Statistical confidence metrics
+
+### `gopher live`
+
+Start live trading on Hyperliquid.
+
+```bash
+gopher live [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--config` | Path to traders.yaml config | `traders.yaml` |
+| `--mode` | Trading mode (paper/live) | `paper` |
+| `--strategy` | Strategy prompt | Default strategy |
+| `--orchestrator` | Use LLM for dynamic strategy selection | `false` |
+| `--llm-api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--llm-base-url` | LLM API base URL | OpenRouter |
+| `--db` | SQLite database path | `gopher.db` |
+
+**Paper trading (testnet):**
+
+```bash
+gopher live --config traders.yaml --mode paper
+```
+
+**Live trading (mainnet - real funds!):**
+
+```bash
+gopher live --config traders.yaml --mode live
+```
+
+**With LLM orchestrator:**
+
+```bash
+gopher live --config traders.yaml --orchestrator --db gopher.db
+```
+
+### `gopher trades`
+
+Query trade history from the database.
+
+```bash
+gopher trades [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--trader` | Filter by trader ID | All traders |
+| `--symbol` | Filter by symbol (e.g., BTC) | All symbols |
+| `--mode` | Filter by mode (paper/live) | All modes |
+| `--since` | Filter trades after date (YYYY-MM-DD) | All time |
+| `--limit` | Number of results | `50` |
+| `--json` | Output in JSON format | `false` |
+| `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
+
+**Examples:**
+
+```bash
+# Recent trades
+gopher trades --limit 20
+
+# Filter by symbol
+gopher trades --symbol BTC --since 2025-01-01
+
+# Export as JSON
+gopher trades --trader trader-1 --json > trades.json
+```
+
+### `gopher history`
+
+View and manage backtest history and sessions.
+
+```bash
+gopher history [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--session` | Filter by session ID | All sessions |
+| `--symbol` | Filter by symbol (e.g., BTC) | All symbols |
+| `--limit` | Number of results | `50` |
+| `--grouped` | Group results by session | `false` |
+| `--resumable` | Show only resumable sessions | `false` |
+| `--json` | Output as JSON | `false` |
+| `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
+
+**Subcommands:**
+
+```bash
+gopher history delete <id>    # Delete a backtest or session
+```
+
+**Examples:**
+
+```bash
+# List recent backtests
+gopher history
+
+# Group by session
+gopher history --grouped
+
+# Show resumable sessions (for evolution)
+gopher history --resumable
+
+# Filter by session
+gopher history --session abc123 --json
+
+# Delete a backtest
+gopher history delete <backtest-id>
+```
+
+### `gopher coverage`
+
+Check data coverage and warmup status for an asset before running backtests.
+
+```bash
+gopher coverage --asset <ASSET> [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--asset` | Trading asset (e.g., BTC, ETH) | **Required** |
+| `--start` | Start date (YYYY-MM-DD) | 7 days ago |
+| `--end` | End date (YYYY-MM-DD) | Today |
+| `--intervals` | Candle intervals to check | `15m,1h,4h` |
+| `--optimal` | Find optimal date range | `false` |
+| `--json` | Output as JSON | `false` |
+| `--api-key` | API key for data service | Usually not required |
+
+**Examples:**
+
+```bash
+# Check coverage for BTC
+gopher coverage --asset BTC
+
+# Check specific date range
+gopher coverage --asset ETH --start 2025-01-01 --end 2025-01-25
+
+# Find optimal date range with sufficient coverage
+gopher coverage --asset BTC --optimal
+
+# Check specific intervals
+gopher coverage --asset SOL --intervals 1h,4h --json
+```
+
+**Output includes:**
+- Coverage percentage (need ≥65% for backtesting)
+- Warmup status for each interval (20 candles required)
+- Recommendations if coverage is insufficient
+
+### `gopher assets`
+
+List available trading assets from Hyperliquid.
+
+```bash
+gopher assets [flags]
+```
+
+| Flag | Description | Default |
+|------|-------------|---------|
+| `--top` | Show top N assets by volume | All |
+| `--json` | Output as JSON | `false` |
+| `--api-key` | API key for data service | Usually not required |
+
+**Examples:**
+
+```bash
+# List all assets
+gopher assets
+
+# Top 20 assets by volume
+gopher assets --top 20
+
+# Output as JSON
+gopher assets --json
 ```
 
 ## Output
 
-Results are saved to JSON files in the output directory:
+### Evolution Results
+
+Evolution sessions are saved and can be resumed:
 
 ```
-results/
-├── session_2025-01-27_143052/
-│   ├── session.json       # Session metadata
-│   ├── backtest_001.json  # Individual backtest results
-│   ├── backtest_002.json
-│   └── best_strategy.json # Best performing strategy
+~/Documents/Gopher/sessions/
+├── agent_20250127_143052/
+│   ├── session.json      # Session state (resumable)
+│   └── backtests/        # Individual backtest results
+```
+
+### Backtest Results
+
+Results are saved to the output directory:
+
+```
+~/Documents/Gopher/sessions/
+├── backtest_BTC_1706123456789/
+│   └── result.json
+```
+
+Results include:
+- Total PnL percentage
+- Win rate
+- Sharpe ratio
+- Max drawdown
+- Individual trade details
+
+### Trade History
+
+The `trades` command displays a formatted table:
+
+```
+TIME                  SYMBOL  SIDE  ENTRY     EXIT      PNL       REASON
+2025-01-27 14:30:05   BTC     long  42500.00  43000.00  +$125.00  take_profit
+2025-01-27 12:15:22   ETH     short 2250.00   2200.00   +$50.00   take_profit
+
+Summary: 15 trades | Total PnL: +$850.00 | Win Rate: 60.0%
+```
+
+## Workflow Examples
+
+### Complete Evolution Workflow
+
+```bash
+# 1. Check available assets
+gopher assets --top 20
+
+# 2. Verify data coverage for your chosen asset
+gopher coverage --asset BTC --optimal
+
+# 3. Run strategy evolution
+gopher evolve --asset BTC --start 2025-01-01 --end 2025-01-25 --iterations 50
+
+# 4. Validate best strategy with Monte Carlo
+gopher montecarlo --asset BTC --prompt "Your evolved strategy here" --runs 100
+
+# 5. View evolution history
+gopher history --grouped
+
+# 6. Start paper trading with validated strategy
+gopher live --config traders.yaml --mode paper
+```
+
+### Automation Script Example
+
+```bash
+#!/bin/bash
+# daily_evolution.sh - Run nightly evolution
+
+ASSET="BTC"
+START=$(date -d "7 days ago" +%Y-%m-%d)
+END=$(date +%Y-%m-%d)
+
+gopher evolve \
+  --asset $ASSET \
+  --start $START \
+  --end $END \
+  --iterations 100 \
+  --json > results/evolution_$(date +%Y%m%d).json 2>&1
 ```
 
 ## Next Steps
 
-- [Quick Start Guide](/guides/quickstart) - Run your first strategy evolution
+- [Quick Start Guide](/guides/quickstart) - Run your first backtest
 - [Configuration](/guides/configuration) - Detailed configuration options
 - [Data Coverage](/reference/data-coverage) - Available assets and timeframes
