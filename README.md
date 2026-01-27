@@ -15,40 +15,25 @@ Developed by [Moon Laboratories Inc](https://gotrader.gopher-ai.com).
 
 ### Install CLI
 
-Download the latest release for your platform from [Releases](https://github.com/gopher-lab/gopher/releases):
+**macOS / Linux (one-liner):**
 
-| Platform | File |
-|----------|------|
-| macOS (Apple Silicon) | `gopher-{version}-darwin-arm64.tar.gz` |
-| macOS (Intel) | `gopher-{version}-darwin-amd64.tar.gz` |
-| Windows | `gopher-{version}-windows-amd64.zip` |
-| Linux (x64) | `gopher-{version}-linux-amd64.tar.gz` |
-
-**macOS / Linux:**
 ```bash
-# Download and extract
-curl -L -o gopher.tar.gz https://github.com/gopher-lab/gopher/releases/latest/download/gopher-0.3.0-darwin-arm64.tar.gz
-tar -xzf gopher.tar.gz
-chmod +x gopher
-
-# Optional: Add to PATH
-sudo mv gopher /usr/local/bin/
-
-# Verify installation
-gopher --version
+curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/install.sh | bash
 ```
 
 **Windows:**
-1. Download and extract `gopher-{version}-windows-amd64.zip`
-2. Add the directory containing `gopher.exe` to your PATH
+
+1. Download `gopher-*-windows-amd64.zip` from [Releases](https://github.com/gopher-lab/gopher/releases)
+2. Extract and add the directory to your PATH
 3. Run `gopher.exe --version` to verify
 
 **First-time setup:**
+
 ```bash
 gopher setup
 ```
 
-This interactive wizard configures API keys, trading mode, and Hyperliquid credentials.
+The interactive wizard configures API keys, trading mode, and Hyperliquid credentials.
 
 ---
 
@@ -82,12 +67,12 @@ Desktop applications are available but lag behind the CLI in development:
 | Windows | ⚠️ Available | ❌ |
 
 **macOS:**
-1. Download the latest DMG from [Releases](https://github.com/gopher-lab/gopher/releases)
-2. Open `Gopher-X.X.X.dmg` and drag to Applications
+1. Download the latest `.dmg` from [Releases](https://github.com/gopher-lab/gopher/releases)
+2. Open the DMG and drag Gopher to Applications
 3. Right-click → Open (required for unsigned apps)
 
 **Windows:**
-1. Download `Gopher-Setup-X.X.X.exe` from [Releases](https://github.com/gopher-lab/gopher/releases)
+1. Download the latest `Gopher-Setup.exe` from [Releases](https://github.com/gopher-lab/gopher/releases)
 2. Run the installer and follow the wizard
 
 > **Note**: Desktop apps do not yet support live trading. Use the CLI for full feature access.
