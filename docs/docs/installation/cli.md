@@ -91,20 +91,23 @@ gopher.exe --help
 
 The CLI uses environment variables for configuration.
 
-### Required: API Key
+### Required: API Access
 
-Set your LLM API key:
+Choose one authentication method:
 
 ```bash
-# OpenRouter (recommended)
+# Option 1: Gopher Credits (recommended - easiest)
+# Get your key at https://gotrader.gopher-ai.com/settings
+export BART_GOPHER_CODE='gopher_your-key-here'
+
+# Option 2: OpenRouter
 export OPENROUTER_API_KEY='sk-or-v1-your-key-here'
 
-# Or OpenAI
+# Option 3: OpenAI
 export OPENAI_API_KEY='sk-your-key-here'
-
-# Or Gopher Key
-export BART_GOPHER_CODE='gopher_your-key-here'
 ```
+
+**Gopher Credits** are the easiest option - no external API accounts needed. Purchase credits at [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings).
 
 ### Optional: Database
 

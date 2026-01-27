@@ -10,11 +10,35 @@ Gopher supports multiple LLM providers and models for strategy generation and ba
 
 | Provider | Description | API Key Required |
 |----------|-------------|------------------|
+| **Gopher Credits** | Hosted inference, easiest setup | Yes (Gopher Key) |
 | **OpenRouter** | Access 100+ models with one key | Yes |
 | **OpenAI** | GPT-4, GPT-4o models | Yes |
-| **Gopher** | Hosted inference service | Yes (Gopher Key) |
 | **Ollama** | Local models | No |
 | **Custom** | Any OpenAI-compatible API | Varies |
+
+## Gopher Credits (Recommended)
+
+The easiest way to use Gopher - no external API accounts needed.
+
+### Setup
+
+1. Go to [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings)
+2. Create an account or sign in
+3. Purchase credits
+4. Copy your **Gopher Key** (format: `gopher_xxx...`)
+5. Enter in Gopher Settings or set as environment variable:
+   ```bash
+   export BART_GOPHER_CODE='gopher_your-key-here'
+   ```
+
+### Benefits
+
+- **No external accounts**: Single account for everything
+- **Optimized models**: Pre-configured for best results
+- **Pay-as-you-go**: Only pay for what you use
+- **Simple setup**: Just one key to configure
+
+When using Gopher Credits, model selection is handled automatically with optimized defaults.
 
 ## Recommended Models
 
