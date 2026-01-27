@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Documentation
+    url: https://docs.moonlaboratories.com/gopher
+    about: Check the documentation for guides, troubleshooting, and API reference
+  - name: 💬 Email Support
+    url: mailto:hello@gopher-ai.com
+    about: Contact us directly via email for support questions
