@@ -270,13 +270,18 @@ gopher evolve --resume ~/Documents/Gopher/sessions/agent_20250127_143052.session
 
 Once you've found profitable strategies, deploy them to Hyperliquid.
 
-### 1. Get Your Hyperliquid Private Key
+### 1. Get Your Wallet Private Key
 
-1. Go to [Hyperliquid](https://app.hyperliquid.xyz/)
-2. Connect your wallet
-3. Go to **Settings** → **API Wallet**
-4. Click **Generate API Wallet**
-5. Copy the private key (starts with `0x...`)
+Your Hyperliquid account is tied to your connected wallet. Export the private key from the wallet you use to connect to Hyperliquid:
+
+**MetaMask:**
+1. Click the three dots menu → **Account details**
+2. Click **Show private key**
+3. Enter your password and copy the key (starts with `0x...`)
+
+**Rabby:**
+1. Click the account icon → **More** → **Export Private Key**
+2. Enter your password and copy the key (starts with `0x...`)
 
 :::warning Security
 Never share your private key! Store it securely and never commit it to version control.
@@ -291,24 +296,28 @@ gopher setup --mode live
 ```
 
 The wizard will:
-- Ask for your private key environment variable name (default: `TRADER_PRIVATE_KEY`)
+- Ask for your **OpenRouter API key** (for LLM)
+- Ask for your **Hyperliquid private key** (securely stored in `.env`)
 - Create a `traders.yaml` configuration file
 - Set up your trading parameters
 
-### 3. Set Your Private Key
+Your private key is saved to `~/Documents/Gopher/.env` and **never** committed to version control.
 
-Set the environment variable in your shell:
+### 3. Alternative: Manual Configuration
+
+If you prefer to set up manually:
 
 ```bash
 # Add to ~/.zshrc or ~/.bashrc
 export TRADER_PRIVATE_KEY='your-private-key-here'
+export OPENROUTER_API_KEY='your-openrouter-key'
 ```
 
 Or create a `.env` file (add to `.gitignore`!):
 
 ```bash
 # .env
-HL_PRIVATE_KEY=your-private-key-here
+TRADER_PRIVATE_KEY=your-private-key-here
 OPENROUTER_API_KEY=your-openrouter-key
 ```
 
