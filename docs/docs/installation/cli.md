@@ -288,7 +288,7 @@ gopher evolve --asset <ASSET> [flags]
 | `--leverage` | Trading leverage | `10` |
 | `--model` | LLM model for strategy evolution | `qwen/qwen3-max` |
 | `--backtest-model` | LLM model for backtest decisions | `qwen/qwen3-vl-8b-instruct` |
-| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--api-key` | LLM API key | `$BART_GOPHER_CODE` or `$OPENROUTER_API_KEY` |
 | `--base-url` | LLM API base URL | OpenRouter |
 | `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
 | `--output` | Output directory for sessions | `~/Documents/Gopher/sessions` |
@@ -328,7 +328,8 @@ gopher backtest --asset <ASSET> --prompt <STRATEGY> [flags]
 | `--intervals` | Candle intervals | `15m,1h,4h` |
 | `--leverage` | Trading leverage | `10` |
 | `--model` | LLM model for decisions | `qwen/qwen3-vl-8b-instruct` |
-| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--api-key` | LLM API key | `$BART_GOPHER_CODE` or `$OPENROUTER_API_KEY` |
+| `--base-url` | LLM API base URL | `https://openrouter.ai/api/v1` |
 | `--json` | Output results as JSON | `false` |
 | `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
 | `--output` | Output directory for results | `~/Documents/Gopher/sessions` |
@@ -364,9 +365,8 @@ Alias: `gopher mc`
 | `--start` | Start date (YYYY-MM-DD) | 7 days ago |
 | `--end` | End date (YYYY-MM-DD) | Today |
 | `--intervals` | Candle intervals | `15m,1h,4h` |
-| `--leverage` | Trading leverage | `10` |
 | `--model` | LLM model for decisions | `qwen/qwen3-vl-8b-instruct` |
-| `--api-key` | LLM API key | `$OPENROUTER_API_KEY` |
+| `--api-key` | LLM API key | `$BART_GOPHER_CODE` or `$OPENROUTER_API_KEY` |
 | `--base-url` | LLM API base URL | OpenRouter |
 | `--db` | SQLite database path | `~/Documents/Gopher/gopher.db` |
 | `--json` | Output results as JSON | `false` |
