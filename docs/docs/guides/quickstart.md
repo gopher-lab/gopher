@@ -13,16 +13,29 @@ Before you begin:
 1. **Install Gopher** - Download from [macOS](/installation/macos), [Windows](/installation/windows), or [CLI](/installation/cli)
 2. **Get an API Key** - You'll need an LLM API key (see below)
 
-## Step 1: Get an API Key
+## Step 1: Get API Access
 
-Gopher uses AI models to generate and evolve trading strategies. You need an API key from one of these providers:
+Gopher uses AI models to generate and evolve trading strategies. Choose one of these options:
+
+### Option A: Gopher Credits (Easiest)
+
+Use Gopher's hosted inference service - no external API keys needed:
+
+1. Go to [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings)
+2. Create an account or sign in
+3. Purchase credits or use your existing balance
+4. Copy your **Gopher Key** (starts with `gopher_`)
+
+### Option B: Bring Your Own API Key
+
+Use your own API key from a provider:
 
 | Provider | Description | Get Key |
 |----------|-------------|---------|
-| **OpenRouter** | Access to 100+ models (recommended) | [openrouter.ai/keys](https://openrouter.ai/keys) |
+| **OpenRouter** | Access to 100+ models | [openrouter.ai/keys](https://openrouter.ai/keys) |
 | **OpenAI** | GPT-4, GPT-4o models | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
 
-OpenRouter is recommended because it provides access to many models with a single API key.
+**Gopher Credits** are recommended for simplicity - inference is handled automatically with optimized models.
 
 ## Step 2: Configure Gopher
 
@@ -30,18 +43,22 @@ OpenRouter is recommended because it provides access to many models with a singl
 
 1. Launch **Gopher** from your Applications folder (macOS) or Start menu (Windows)
 2. Click the **Settings** icon (gear) in the sidebar
-3. Under **General**, enter your API key:
-   - For OpenRouter: Paste in the **OpenRouter API Key** field
-   - For OpenAI: Paste in the **OpenAI API Key** field
+3. Under **General**, enter your credentials:
+   - **For Gopher Credits**: Paste your Gopher Key in the **Gopher Key** field
+   - **For OpenRouter**: Paste in the **OpenRouter API Key** field
+   - **For OpenAI**: Paste in the **OpenAI API Key** field
 4. Click **Test** to verify the connection
 5. A green checkmark indicates success
 
 ### CLI
 
-Set your API key as an environment variable:
+Set your credentials as an environment variable:
 
 ```bash
-# OpenRouter
+# Gopher Credits (recommended)
+export BART_GOPHER_CODE='gopher_your-key-here'
+
+# Or OpenRouter
 export OPENROUTER_API_KEY='sk-or-v1-your-key-here'
 
 # Or OpenAI

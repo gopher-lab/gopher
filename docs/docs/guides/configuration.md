@@ -28,11 +28,30 @@ Gopher settings are organized into four sections:
 
 The cloud API is recommended for most users - it provides access to historical data for 200+ assets without any setup.
 
-### API Keys
+### Authentication
 
-Gopher supports multiple LLM providers. Configure at least one:
+Gopher supports multiple ways to access LLM inference. Configure at least one:
 
-#### OpenRouter (Recommended)
+#### Gopher Credits (Recommended)
+
+The easiest way to get started - use Gopher's hosted inference service:
+
+1. Go to [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings)
+2. Create an account or sign in
+3. Purchase credits (or use existing balance)
+4. Copy your **Gopher Key** (format: `gopher_xxx...`)
+5. Paste in the **Gopher Key** field in Settings
+6. Click **Test** to verify
+
+**Benefits of Gopher Credits:**
+- No external API keys needed
+- Optimized models pre-configured
+- Pay-as-you-go pricing
+- Single account for everything
+
+#### OpenRouter
+
+Bring your own OpenRouter API key:
 
 1. Get a key at [openrouter.ai/keys](https://openrouter.ai/keys)
 2. Paste in the **OpenRouter API Key** field
@@ -42,19 +61,11 @@ OpenRouter provides access to 100+ models with a single API key.
 
 #### OpenAI
 
+Use OpenAI directly:
+
 1. Get a key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
 2. Paste in the **OpenAI API Key** field
 3. Click **Test** to verify
-
-#### Gopher Key
-
-1. Get your key at [gotrader.gopher-ai.com](https://gotrader.gopher-ai.com)
-2. Set as environment variable:
-   ```bash
-   export BART_GOPHER_CODE='gopher_your-key-here'
-   ```
-
-When using a Gopher Key, LLM inference is handled automatically - no additional API keys required.
 
 ## Model Settings
 
@@ -178,17 +189,24 @@ For CLI users or advanced configuration:
 
 | Variable | Description |
 |----------|-------------|
+| `BART_GOPHER_CODE` | Gopher Key for hosted inference (recommended) |
 | `OPENROUTER_API_KEY` | OpenRouter API key |
 | `OPENAI_API_KEY` | OpenAI API key |
-| `BART_GOPHER_CODE` | Gopher Key for authentication |
 | `DATABASE_URL` | Local database connection string |
 
 Example setup:
 
 ```bash
 # ~/.bashrc or ~/.zshrc
+
+# Option 1: Gopher Credits (recommended)
+export BART_GOPHER_CODE='gopher_your-key-here'
+
+# Option 2: OpenRouter
 export OPENROUTER_API_KEY='sk-or-v1-your-key-here'
 ```
+
+Get your Gopher Key at [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings).
 
 ## Presets
 
