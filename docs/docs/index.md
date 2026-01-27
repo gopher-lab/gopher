@@ -9,6 +9,8 @@ slug: /
 
 Gopher uses Large Language Models (LLMs) to autonomously discover, test, and evolve profitable trading strategies. Instead of manually designing rules, Gopher's AI agent continuously generates and refines strategies based on real market data.
 
+> **New to Gopher?** The [CLI](/installation/cli) is the recommended way to use Gopher. It's always the most up-to-date and includes features like live trading that haven't yet reached the desktop apps.
+
 ## Key Features
 
 ### Autonomous Strategy Discovery
@@ -55,15 +57,19 @@ Configurable position sizing, stop-loss levels, leverage controls, and maximum m
 
 ## Get Started
 
-Choose your platform to begin:
+:::tip Recommended: Command-Line Interface
+The **CLI is the primary entry point** for Gopher and always has the latest features. Desktop apps follow behind in development and currently do not support live trading.
 
-| Platform | Description |
-|----------|-------------|
-| [**macOS**](/installation/macos) | Desktop app for Apple Silicon and Intel Macs |
-| [**Windows**](/installation/windows) | Desktop app for Windows 10/11 |
-| [**CLI**](/installation/cli) | Command-line interface for all platforms |
+If you want access to **live trading** and the newest capabilities, use the CLI.
+:::
 
-Or jump straight to the [Quick Start Guide](/guides/quickstart) to run your first strategy evolution.
+| Platform | Description | Live Trading |
+|----------|-------------|:------------:|
+| [**CLI**](/installation/cli) | Command-line interface for all platforms (recommended) | ✅ |
+| [**macOS**](/installation/macos) | Desktop app for Apple Silicon and Intel Macs | ❌ |
+| [**Windows**](/installation/windows) | Desktop app for Windows 10/11 | ❌ |
+
+Jump straight to the [Quick Start Guide](/guides/quickstart) to run your first strategy evolution with the CLI.
 
 ## Requirements
 
