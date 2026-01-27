@@ -96,17 +96,29 @@ gopher setup
 
 This guides you through:
 - Selecting trading mode (backtest only, live only, or both)
-- Configuring LLM API keys (OpenRouter)
+- Configuring LLM API key (**Gopher Key recommended**, or OpenRouter)
 - **Entering your Hyperliquid private key** (securely saved to `.env`)
 - Setting up trading parameters
 
-The wizard securely stores your private key in `~/Documents/Gopher/.env`.
+The wizard securely stores your credentials in `~/Documents/Gopher/.env`.
 
 ### Manual Configuration
 
-#### OpenRouter API Key
+#### Gopher Key (Recommended)
 
-For backtesting and strategy evolution, you need an [OpenRouter](https://openrouter.ai/) API key:
+The easiest way to get started - use Gopher's hosted inference:
+
+1. Go to [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings)
+2. Create an account and get your **Gopher Key** (starts with `gopher_`)
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export BART_GOPHER_CODE='gopher_your-key-here'
+```
+
+#### Alternative: OpenRouter API Key
+
+Bring your own API key from [OpenRouter](https://openrouter.ai/):
 
 ```bash
 # Add to ~/.zshrc or ~/.bashrc

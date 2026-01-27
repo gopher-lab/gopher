@@ -296,12 +296,12 @@ gopher setup --mode live
 ```
 
 The wizard will:
-- Ask for your **OpenRouter API key** (for LLM)
+- Ask for your **Gopher Key** or OpenRouter API key (for LLM)
 - Ask for your **Hyperliquid private key** (securely stored in `.env`)
 - Create a `traders.yaml` configuration file
 - Set up your trading parameters
 
-Your private key is saved to `~/Documents/Gopher/.env` and **never** committed to version control.
+Your credentials are saved to `~/Documents/Gopher/.env` and **never** committed to version control.
 
 ### 3. Alternative: Manual Configuration
 
@@ -309,16 +309,23 @@ If you prefer to set up manually:
 
 ```bash
 # Add to ~/.zshrc or ~/.bashrc
-export TRADER_PRIVATE_KEY='your-private-key-here'
+
+# Gopher Key (recommended)
+export BART_GOPHER_CODE='gopher_your-key-here'
+
+# Or OpenRouter
 export OPENROUTER_API_KEY='your-openrouter-key'
+
+# Hyperliquid private key
+export TRADER_PRIVATE_KEY='your-private-key-here'
 ```
 
 Or create a `.env` file (add to `.gitignore`!):
 
 ```bash
 # .env
+BART_GOPHER_CODE=gopher_your-key-here
 TRADER_PRIVATE_KEY=your-private-key-here
-OPENROUTER_API_KEY=your-openrouter-key
 ```
 
 ### 4. Paper Trading (Testnet)
