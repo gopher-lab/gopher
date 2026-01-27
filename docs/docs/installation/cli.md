@@ -84,6 +84,63 @@ gopher.exe --version
 gopher.exe --help
 ```
 
+## Configuration
+
+### Quick Setup (Recommended)
+
+Run the interactive wizard to configure everything:
+
+```bash
+gopher setup
+```
+
+This guides you through:
+- Selecting trading mode (backtest only, live only, or both)
+- Configuring LLM API keys (OpenRouter)
+- Setting up Hyperliquid wallet for live trading
+
+### Manual Configuration
+
+#### OpenRouter API Key
+
+For backtesting and strategy evolution, you need an [OpenRouter](https://openrouter.ai/) API key:
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export OPENROUTER_API_KEY='sk-or-v1-your-key-here'
+```
+
+#### Hyperliquid Private Key (Live Trading)
+
+For live trading on Hyperliquid:
+
+1. Go to [Hyperliquid](https://app.hyperliquid.xyz/) and connect your wallet
+2. Navigate to **Settings** → **API Wallet**
+3. Click **Generate API Wallet** and copy the private key
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc (NEVER commit this!)
+export TRADER_PRIVATE_KEY='0x-your-private-key-here'
+```
+
+:::warning Security
+- Never commit private keys to version control
+- Add `.env` files to `.gitignore`
+- Use environment variables, not hardcoded values
+:::
+
+### Configuration Files
+
+Gopher stores configuration in `~/Documents/Gopher/`:
+
+| File | Purpose |
+|------|---------|
+| `settings.json` | App settings and API keys |
+| `traders.yaml` | Live trading configuration |
+| `gopher.db` | SQLite database for backtests and trades |
+| `sessions/` | Evolution session files |
+| `logs/` | Application logs |
+
 ## Available Commands
 
 The Gopher CLI provides these commands with **full feature parity** to the desktop app:
