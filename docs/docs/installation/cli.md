@@ -97,7 +97,10 @@ gopher setup
 This guides you through:
 - Selecting trading mode (backtest only, live only, or both)
 - Configuring LLM API keys (OpenRouter)
-- Setting up Hyperliquid wallet for live trading
+- **Entering your Hyperliquid private key** (securely saved to `.env`)
+- Setting up trading parameters
+
+The wizard securely stores your private key in `~/Documents/Gopher/.env`.
 
 ### Manual Configuration
 
