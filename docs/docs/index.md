@@ -29,25 +29,29 @@ Configurable position sizing, stop-loss levels, leverage controls, and maximum m
 ## How It Works
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                   Strategy Evolution Loop                    │
-│                                                              │
-│   ┌──────────┐     ┌──────────┐     ┌──────────┐           │
-│   │ Generate │────▶│ Backtest │────▶│ Analyze  │           │
-│   │ Strategy │     │ Strategy │     │ Results  │           │
-│   └──────────┘     └──────────┘     └──────────┘           │
-│        ▲                                 │                  │
-│        │           ┌──────────┐          │                  │
-│        └───────────│  Evolve  │◀─────────┘                  │
-│                    │ Strategy │                             │
-│                    └──────────┘                             │
-└─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                      Gopher Workflow                             │
+│                                                                  │
+│  ┌────────┐     ┌─────────┐     ┌────────────┐     ┌────────┐  │
+│  │ Setup  │────▶│ Evolve  │────▶│ Validate   │────▶│  Live  │  │
+│  └────────┘     │Strategy │     │Monte Carlo │     │Trading │  │
+│                 └─────────┘     └────────────┘     └────────┘  │
+│                      │                │                 │       │
+│  ┌────────┐          ▼                │                 ▼       │
+│  │ Assets │    ┌─────────┐            │           ┌────────┐   │
+│  │Coverage│    │Backtest │◀───────────┘           │ Query  │   │
+│  └────────┘    │ History │                        │ Trades │   │
+│                └─────────┘                        └────────┘   │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-1. **Generate** - The AI creates trading strategies based on technical analysis
-2. **Backtest** - Strategies are tested against historical market data
-3. **Analyze** - Performance metrics are evaluated (PnL, Sharpe, win rate)
-4. **Evolve** - The AI refines strategies based on results and repeats
+1. **Setup** - Configure API keys and data sources via the wizard
+2. **Evolve** - AI-powered autonomous strategy discovery and refinement
+3. **Validate** - Monte Carlo simulation for statistical robustness
+4. **Live Trading** - Deploy strategies to Hyperliquid (paper or live)
+5. **Backtest** - Run individual backtests with specific strategies
+6. **History** - Review past sessions and results
+7. **Assets/Coverage** - Check available assets and data availability
 
 ## Get Started
 
