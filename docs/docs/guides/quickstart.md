@@ -114,11 +114,19 @@ gopher evolve \
 
 Want to get started immediately? Use the provided quickstart script with a tested configuration:
 
+**macOS / Linux:**
+
 ```bash
-# Download and run the quickstart script
 curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.sh -o quickstart-tao.sh
 chmod +x quickstart-tao.sh
 ./quickstart-tao.sh
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.ps1" -OutFile "quickstart-tao.ps1"
+.\quickstart-tao.ps1
 ```
 
 This script runs evolution on **TAO** (Bittensor) with settings optimized for:

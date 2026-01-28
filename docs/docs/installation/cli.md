@@ -630,13 +630,19 @@ Summary: 15 trades | Total PnL: +$850.00 | Win Rate: 60.0%
 
 The fastest way to experience Gopher is with the provided quickstart script:
 
+**macOS / Linux:**
+
 ```bash
-# Download the quickstart script
 curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.sh -o quickstart-tao.sh
 chmod +x quickstart-tao.sh
-
-# Run it
 ./quickstart-tao.sh
+```
+
+**Windows (PowerShell):**
+
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.ps1" -OutFile "quickstart-tao.ps1"
+.\quickstart-tao.ps1
 ```
 
 This script runs evolution on TAO with a tested multi-timeframe configuration (15m, 30m, 1h intervals over a 25-day rolling window).
