@@ -32,6 +32,11 @@ fi
 END_DATE=$(date +%Y-%m-%d)
 START_DATE=$(date -v-25d +%Y-%m-%d 2>/dev/null || date -d "25 days ago" +%Y-%m-%d)
 
+# Set up database path in user's home directory
+GOPHER_DIR="$HOME/Documents/Gopher"
+mkdir -p "$GOPHER_DIR"
+DB_PATH="$GOPHER_DIR/gopher.db"
+
 echo "=============================================="
 echo "  Gopher Quick Start - TAO Strategy Evolution"
 echo "=============================================="
@@ -54,4 +59,5 @@ gopher evolve \
   --iterations 50 \
   --leverage 10 \
   --model qwen/qwen3-max \
-  --backtest-model qwen/qwen3-vl-8b-instruct
+  --backtest-model qwen/qwen3-vl-8b-instruct \
+  --db "$DB_PATH"

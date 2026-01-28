@@ -31,6 +31,13 @@ if (-not $env:BART_GOPHER_CODE -and -not $env:OPENROUTER_API_KEY) {
 $END_DATE = (Get-Date).ToString("yyyy-MM-dd")
 $START_DATE = (Get-Date).AddDays(-25).ToString("yyyy-MM-dd")
 
+# Set up database path in user's Documents folder
+$GOPHER_DIR = Join-Path $env:USERPROFILE "Documents\Gopher"
+if (-not (Test-Path $GOPHER_DIR)) {
+    New-Item -ItemType Directory -Path $GOPHER_DIR -Force | Out-Null
+}
+$DB_PATH = Join-Path $GOPHER_DIR "gopher.db"
+
 Write-Host "=============================================="
 Write-Host "  Gopher Quick Start - TAO Strategy Evolution"
 Write-Host "=============================================="
@@ -53,4 +60,5 @@ gopher evolve `
   --iterations 50 `
   --leverage 10 `
   --model qwen/qwen3-max `
-  --backtest-model qwen/qwen3-vl-8b-instruct
+  --backtest-model qwen/qwen3-vl-8b-instruct `
+  --db $DB_PATH
