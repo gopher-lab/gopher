@@ -64,6 +64,36 @@ Most Windows 10/11 systems have this pre-installed.
 
 Click the **Test** button next to the API key field to verify.
 
+### "401 Unauthorized: No cookie auth credentials found" (CLI)
+
+This error occurs when using a **Gopher Key** (`gopher_xxx`) with an older CLI version that doesn't properly route Gopher keys to the Gopher API.
+
+**Solution:**
+
+Update to **v0.2.10-alpha or later**:
+
+```bash
+# Check your version
+gopher --version
+
+# Download latest from releases
+# https://github.com/gopher-lab/gopher/releases
+```
+
+**Why this happens:**
+
+Gopher Keys require the Gopher inference API (`gotrader.gopher-ai.com`), not OpenRouter. Older versions incorrectly sent Gopher keys to OpenRouter, causing authentication failures.
+
+**How API key routing works (v0.2.10+):**
+
+| Key Type | Starts With | Routes To |
+|----------|-------------|-----------|
+| Gopher Key | `gopher_` | Gopher API (automatic) |
+| OpenRouter | `sk-or-` | OpenRouter (uses `--base-url`) |
+| Other | Varies | Custom `--base-url` |
+
+The `--base-url` flag only applies to non-Gopher keys. Gopher keys always use the Gopher API.
+
 ### "Rate limit exceeded"
 
 You've made too many API requests in a short period.
