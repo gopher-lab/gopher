@@ -32,22 +32,26 @@ Gopher stores all settings in a fixed location based on your home directory — 
 
 | Platform | Config Path |
 |----------|-------------|
-| **Windows** | `C:\Users\<username>\Documents\BART\config.json` |
-| **macOS** | `~/Documents/BART/config.json` |
-| **Linux** | `~/Documents/BART/config.json` |
+| **Windows** | `C:\Users\<username>\Documents\Gopher\config.json` |
+| **macOS** | `~/Documents/Gopher/config.json` |
+| **Linux** | `~/Documents/Gopher/config.json` |
 
 **Additional folders:**
 
 | Folder | Purpose |
 |--------|---------|
-| `Documents/BART/sessions/` | Strategy evolution session data |
-| `Documents/BART/logs/` | Application logs |
+| `Documents/Gopher/sessions/` | Strategy evolution session data |
+| `Documents/Gopher/gopher.db` | Local database |
 
 Run `gopher setup` to create or update your configuration.
 
-### Why is the folder called "BART" instead of "Gopher"?
+### I have an old "BART" folder — will my config still work?
 
-BART (Backtesting and Algorithmic Research Tool) was the original project codename. The folder name is kept for backward compatibility with existing installations.
+**Yes!** Gopher automatically detects and uses legacy `Documents/BART/` folders for backwards compatibility. If you have an existing BART installation:
+
+- Your existing config and sessions will continue to work
+- New installations will use `Documents/Gopher/`
+- You can manually migrate by renaming `BART` to `Gopher` (optional)
 
 ---
 
