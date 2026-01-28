@@ -628,7 +628,27 @@ Summary: 15 trades | Total PnL: +$850.00 | Win Rate: 60.0%
 
 ### Quick Start Script
 
-The fastest way to experience Gopher is with the provided quickstart script:
+The fastest way to experience Gopher is with the provided quickstart script.
+
+**Step 1: Set your API key**
+
+Get your Gopher Key from [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings), then set it in your terminal:
+
+**macOS / Linux:**
+
+```bash
+export BART_GOPHER_CODE='gopher_your-key-here'
+```
+
+**Windows (PowerShell):**
+
+```powershell
+$env:BART_GOPHER_CODE='gopher_your-key-here'
+```
+
+Replace `gopher_your-key-here` with your actual key (starts with `gopher_`).
+
+**Step 2: Download and run the script**
 
 **macOS / Linux:**
 

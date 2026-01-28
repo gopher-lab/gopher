@@ -112,7 +112,29 @@ gopher evolve \
 
 ### Quick Start Script
 
-Want to get started immediately? Use the provided quickstart script with a tested configuration:
+Want to get started immediately? Use the provided quickstart script with a tested configuration.
+
+**Step 1: Set your API key**
+
+First, get your Gopher Key from [gotrader.gopher-ai.com/settings](https://gotrader.gopher-ai.com/settings), then set it:
+
+**macOS / Linux:**
+
+```bash
+export BART_GOPHER_CODE='gopher_your-key-here'
+```
+
+**Windows (PowerShell):**
+
+```powershell
+$env:BART_GOPHER_CODE='gopher_your-key-here'
+```
+
+:::tip
+Replace `gopher_your-key-here` with your actual key. It starts with `gopher_` followed by a long string of letters and numbers.
+:::
+
+**Step 2: Download and run the script**
 
 **macOS / Linux:**
 
