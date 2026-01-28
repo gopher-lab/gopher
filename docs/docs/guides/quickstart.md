@@ -110,6 +110,26 @@ gopher evolve \
   --prompt "Focus on momentum breakouts"
 ```
 
+### Quick Start Script
+
+Want to get started immediately? Use the provided quickstart script with a tested configuration:
+
+```bash
+# Download and run the quickstart script
+curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.sh -o quickstart-tao.sh
+chmod +x quickstart-tao.sh
+./quickstart-tao.sh
+```
+
+This script runs evolution on **TAO** (Bittensor) with settings optimized for:
+- **Multi-timeframe analysis**: 15m, 30m, 1h intervals
+- **Good data coverage**: TAO typically has reliable historical data
+- **Balanced exploration**: 50 iterations for thorough strategy discovery
+
+:::tip
+Results vary based on market conditions. The quickstart is designed to demonstrate the evolution process with a configuration that works well across different market environments.
+:::
+
 ## What Happens During Evolution
 
 Gopher's evolution loop:

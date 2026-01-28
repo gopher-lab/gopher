@@ -626,6 +626,21 @@ Summary: 15 trades | Total PnL: +$850.00 | Win Rate: 60.0%
 
 ## Workflow Examples
 
+### Quick Start Script
+
+The fastest way to experience Gopher is with the provided quickstart script:
+
+```bash
+# Download the quickstart script
+curl -sSL https://raw.githubusercontent.com/gopher-lab/gopher/main/quickstart-tao.sh -o quickstart-tao.sh
+chmod +x quickstart-tao.sh
+
+# Run it
+./quickstart-tao.sh
+```
+
+This script runs evolution on TAO with a tested multi-timeframe configuration (15m, 30m, 1h intervals over a 25-day rolling window).
+
 ### Complete Evolution Workflow
 
 ```bash
