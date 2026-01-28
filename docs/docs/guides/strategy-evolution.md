@@ -259,6 +259,7 @@ If providing a starting prompt:
 
 ## Next Steps
 
+- [Custom Prompts](/guides/custom-prompts) - Guide the AI with your trading approach
 - [Configuration](/guides/configuration) - Fine-tune evolution settings
 - [Troubleshooting](/guides/troubleshooting) - Common issues and solutions
 - [Data Coverage](/reference/data-coverage) - Available assets and timeframes

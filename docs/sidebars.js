@@ -21,6 +21,7 @@ const sidebars = {
         'guides/quickstart',
         'guides/configuration',
         'guides/strategy-evolution',
+        'guides/custom-prompts',
         'guides/troubleshooting',
         'guides/faq',
         'guides/contributing',
