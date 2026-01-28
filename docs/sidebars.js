@@ -22,6 +22,7 @@ const sidebars = {
         'guides/configuration',
         'guides/strategy-evolution',
         'guides/troubleshooting',
+        'guides/faq',
         'guides/contributing',
       ],
     },
