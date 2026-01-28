@@ -272,6 +272,57 @@ The binary isn't in your PATH.
 2. Quotes are correct (single quotes for special characters)
 3. No extra spaces
 
+## Live Trading Issues
+
+### "Order could not immediately match against any resting orders"
+
+This error occurs when an IOC (Immediate-or-Cancel) order can't fill because the limit price is too tight relative to the current orderbook.
+
+**Cause:** The slippage buffer is smaller than the asset's bid-ask spread, or the price moved between BBO fetch and order placement.
+
+**Solutions:**
+
+1. **Increase slippage in traders.yaml:**
+   ```yaml
+   traders:
+     - id: "my-trader"
+       slippage_bps: 35  # Increase from default 25
+       # ... other settings
+   ```
+
+2. **Use higher slippage for illiquid assets:**
+
+   | Asset Liquidity | Recommended slippage_bps |
+   |-----------------|-------------------------|
+   | High (BTC, ETH) | 10-25 |
+   | Medium (SOL, AVAX) | 25-35 |
+   | Low (TAO, smaller caps) | 35-50 |
+
+3. **Check the spread:** The log shows the BBO spread in basis points. Your slippage should be at least 2x the spread. The system does this automatically, but you may need higher values during volatile periods.
+
+**Note:** As of v0.2.x, the system uses adaptive slippage (automatically uses at least 2x the current spread) and retries failed orders with +10 bps slippage up to 3 times.
+
+### Order not filling / partial fills
+
+**Cause:** Insufficient liquidity at your price level.
+
+**Solutions:**
+
+1. Reduce position size
+2. Increase slippage tolerance (`slippage_bps` in traders.yaml)
+3. Trade more liquid assets
+4. Avoid trading during low-volume periods
+
+### Position opened but TP/SL orders failed
+
+**Cause:** The take-profit or stop-loss trigger orders were rejected by Hyperliquid.
+
+**Solutions:**
+
+1. Check that TP/SL prices are valid (TP above entry for longs, below for shorts)
+2. Verify the position size meets minimum requirements for trigger orders
+3. The position is still open - you can manually manage it on Hyperliquid
+
 ## Getting Help
 
 If you can't resolve your issue:

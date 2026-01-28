@@ -378,6 +378,45 @@ BART_GOPHER_CODE=gopher_your-key-here
 TRADER_PRIVATE_KEY=your-private-key-here
 ```
 
+### traders.yaml Configuration Reference
+
+The `traders.yaml` file configures your live trading parameters:
+
+```yaml
+traders:
+  - id: "my-trader"              # Unique trader identifier
+    private_key_env: "HL_KEY"    # Env var containing Hyperliquid private key
+    capital: 1000.0              # Capital allocation in USD
+    asset: "BTC"                 # Trading asset
+    model_id: "qwen/qwen3-vl-8b-instruct"  # LLM model for decisions
+    eval_interval: 15m           # How often to evaluate positions
+    leverage: 10                 # Position leverage
+    slippage_bps: 25             # Slippage tolerance in basis points
+```
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `id` | string | required | Unique trader identifier |
+| `private_key_env` | string | required | Environment variable containing Hyperliquid private key |
+| `capital` | float | 1000.0 | Capital allocation in USD |
+| `asset` | string | required | Trading asset (e.g., "BTC", "TAO") |
+| `model_id` | string | qwen/qwen3-vl-8b-instruct | LLM model for trading decisions |
+| `eval_interval` | duration | 5m | How often to evaluate positions |
+| `leverage` | float | 10.0 | Position leverage |
+| `slippage_bps` | float | 25.0 | Slippage tolerance in basis points (1 bps = 0.01%) |
+
+**Slippage Configuration:**
+
+The `slippage_bps` setting controls how much price buffer is added to IOC orders to ensure fills:
+
+| Asset Liquidity | Recommended slippage_bps |
+|-----------------|-------------------------|
+| High (BTC, ETH) | 10-25 |
+| Medium (SOL, AVAX) | 25-35 |
+| Low (TAO, smaller caps) | 35-50 |
+
+Lower values give tighter fills but higher rejection risk on volatile/illiquid assets. The system also uses adaptive slippage (at least 2x the current spread) and retries with escalating slippage if orders fail.
+
 ### 4. Paper Trading (Testnet)
 
 Test your strategy without risking real funds:
