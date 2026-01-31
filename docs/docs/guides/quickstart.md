@@ -34,6 +34,7 @@ Use your own API key from a provider:
 |----------|-------------|---------|
 | **OpenRouter** | Access to 100+ models | [openrouter.ai/keys](https://openrouter.ai/keys) |
 | **OpenAI** | GPT-4, GPT-4o models | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) |
+| **Basilica** | OpenAI-compatible deployment URL | [docs.basilica.ai](https://docs.basilica.ai/inference) |
 
 **Gopher Credits** are recommended for simplicity - inference is handled automatically with optimized models.
 
@@ -47,8 +48,15 @@ Use your own API key from a provider:
    - **For Gopher Credits**: Paste your Gopher Key in the **Gopher Key** field
    - **For OpenRouter**: Paste in the **OpenRouter API Key** field
    - **For OpenAI**: Paste in the **OpenAI API Key** field
+   - **For Basilica**: Add a custom model with base URL `${DEPLOYMENT_URL}/v1` and API key `not-needed`
 4. Click **Test** to verify the connection
 5. A green checkmark indicates success
+
+Advanced users can set per-loop inference overrides in **Settings → Advanced → Inference Overrides**.
+
+![Main dashboard](/img/screenshots/desktop/01-main-dashboard.png)
+
+![Settings - General](/img/screenshots/desktop/03-settings-general.png)
 
 ### CLI
 
