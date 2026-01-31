@@ -14,6 +14,7 @@ Gopher supports multiple LLM providers and models for strategy generation and ba
 | **OpenRouter** | Access 100+ models with one key | Yes |
 | **OpenAI** | GPT-4, GPT-4o models | Yes |
 | **Ollama** | Local models | No |
+| **Basilica** | OpenAI-compatible deployments | No (deployment URL) |
 | **Custom** | Any OpenAI-compatible API | Varies |
 
 ## Gopher Credits (Recommended)
@@ -161,8 +162,13 @@ Add any OpenAI-compatible API endpoint.
    - **Model ID**: The model identifier
    - **Display Name**: Friendly name
    - **Provider**: Select "Custom"
-   - **Base URL**: API endpoint (e.g., `https://api.example.com/v1`)
+   - **Base URL**: OpenAI-compatible root URL only (e.g., `https://api.example.com/v1`)
    - **API Key**: Your key for this endpoint
+
+Note: Do not include `/chat/completions` in the base URL. For per-loop overrides, see
+[Configuration → Inference](/guides/configuration#inference).
+
+![Settings - Models](/img/screenshots/desktop/04-settings-models.png)
 
 ### Compatible Services
 
@@ -172,6 +178,7 @@ Many services offer OpenAI-compatible APIs:
 - **Anyscale**: [anyscale.com](https://anyscale.com)
 - **Perplexity**: [perplexity.ai](https://perplexity.ai)
 - **Groq**: [groq.com](https://groq.com)
+- **Basilica**: [docs.basilica.ai](https://docs.basilica.ai/inference)
 - **Local LLMs**: LM Studio, vLLM, text-generation-webui
 
 ## Model Selection Tips
