@@ -94,6 +94,29 @@ Gopher Keys require the Gopher inference API (`gotrader.gopher-ai.com`), not Ope
 
 The `--base-url` flag only applies to non-Gopher keys. Gopher keys always use the Gopher API.
 
+### "Base URL must not include /chat/completions"
+
+Gopher expects OpenAI-compatible **root** URLs only. If you include `/chat/completions`, requests will fail.
+
+**Solution:**
+- Use the root URL (e.g., `https://api.openai.com/v1`).
+- For custom providers, remove `/chat/completions` and keep the base at `/v1`.
+
+### "Gopher API origin override not working"
+
+If you override the Gopher API origin, it must be the **origin only** (no `/chat/completions`).
+
+**Solution:**
+- Set `BART_GOPHER_API_URL` to the API origin (e.g., `https://gotrader.gopher-ai.com`).
+- Restart the app/CLI after changing env vars.
+
+### "Test model fails but inference runs"
+
+The **Test** button validates the selected provider with the resolved inference settings:
+- **Gopher Credits**: Ensure your Gopher Key is set and valid.
+- **OpenRouter/OpenAI/Custom**: Ensure the provider key is set for that provider.
+- **Per-loop overrides**: If you set a per-loop override with a different provider, that provider’s key must be configured.
+
 ### "Rate limit exceeded"
 
 You've made too many API requests in a short period.

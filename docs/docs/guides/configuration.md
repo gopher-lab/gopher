@@ -67,6 +67,54 @@ Use OpenAI directly:
 2. Paste in the **OpenAI API Key** field
 3. Click **Test** to verify
 
+### Inference
+
+Gopher resolves inference settings per loop, which means the main evolution loop, tools, backtests,
+Monte Carlo validation, and compression can each use different providers or models when needed.
+
+**Inference providers:**
+- **Gopher Credits**
+- **OpenRouter**
+- **OpenAI**
+- **Ollama (local)**
+- **Basilica (OpenAI-compatible)**
+- **Custom (OpenAI-compatible)**
+
+**Per-loop overrides:**
+You can set overrides per loop (provider, model ID, base URL, API key) in the desktop app:
+**Settings → Advanced → Inference Overrides**.
+
+**Base URL conventions:**
+- Use the OpenAI-compatible **root** URL only (no `/chat/completions`).
+- When using Gopher Credits, the base URL is normalized to `.../api/v1/gopher`.
+
+**Environment variables:**
+- `BART_GOPHER_CODE`
+- `BART_GOPHER_API_URL`
+- `OPENROUTER_API_KEY`
+- `OPENAI_API_KEY`
+
+#### Basilica (OpenAI-compatible)
+
+Basilica deployments expose an OpenAI-compatible API. See:
+- https://docs.basilica.ai/introduction
+- https://docs.basilica.ai/inference
+
+Setup steps:
+1. Deploy a model with Basilica (vLLM or SGLang) and copy the deployment URL.
+2. Configure Gopher with:
+   - **Base URL**: `${DEPLOYMENT_URL}/v1`
+   - **API Key**: `not-needed` (Basilica handles auth for the deployment URL)
+3. Example model IDs (Hugging Face IDs):
+   - `Qwen/Qwen2.5-7B-Instruct`
+   - `meta-llama/Llama-3.1-8B-Instruct`
+   - `mistralai/Mistral-7B-Instruct-v0.3`
+   - `deepseek-ai/DeepSeek-V2-Chat`
+
+![Settings - General](/img/screenshots/desktop/03-settings-general.png)
+
+![Settings - Advanced (Inference Overrides)](/img/screenshots/desktop/06-settings-advanced.png)
+
 ## Model Settings
 
 ### Loop Model
