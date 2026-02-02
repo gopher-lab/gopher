@@ -20,6 +20,7 @@ const sidebars = {
       items: [
         'guides/quickstart',
         'guides/configuration',
+        'guides/indicators',
         'guides/strategy-evolution',
         'guides/custom-prompts',
         'guides/troubleshooting',
