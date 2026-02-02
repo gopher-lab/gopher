@@ -400,6 +400,12 @@ traders:
     eval_interval: 15m           # How often to evaluate positions
     leverage: 10                 # Position leverage
     slippage_bps: 25             # Slippage tolerance in basis points
+    intervals: ["15m", "1h", "4h"] # Optional indicator intervals
+    indicators:                 # Optional indicator overrides
+      - type: "sma"
+        enabled: true
+        sma:
+          period: 50
 ```
 
 | Field | Type | Default | Description |
@@ -412,6 +418,8 @@ traders:
 | `eval_interval` | duration | 5m | How often to evaluate positions |
 | `leverage` | float | 10.0 | Position leverage |
 | `slippage_bps` | float | 25.0 | Slippage tolerance in basis points (1 bps = 0.01%) |
+| `intervals` | string[] | optional | Timeframe intervals for indicator summaries |
+| `indicators` | object[] | optional | Indicator overrides (see [Indicators](/guides/indicators)) |
 
 **Slippage Configuration:**
 
@@ -431,6 +439,16 @@ Test your strategy without risking real funds:
 
 ```bash
 gopher live --config traders.yaml --mode paper
+```
+
+Manual overrides (manual mode only):
+
+```bash
+gopher live \
+  --config traders.yaml \
+  --mode paper \
+  --intervals "15m,1h,4h" \
+  --indicators ./indicators.yaml
 ```
 
 ### 5. Live Trading (Mainnet)

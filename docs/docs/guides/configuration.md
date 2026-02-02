@@ -181,6 +181,18 @@ Select intervals for multi-timeframe analysis:
 
 **Tip**: Use multiple timeframes together (e.g., 15m + 1h + 4h) for better results.
 
+### Indicators
+
+Indicators control how the AI summarizes market conditions across timeframes.
+
+- Configure indicators per run in **Backtest**, **Evolution**, or **Monte Carlo**
+- Saved presets include the indicator set
+- If no indicators are selected, defaults are used
+
+See the dedicated guide for examples and full configuration:
+
+- [Indicators](/guides/indicators)
+
 ### Default Strategy Prompt
 
 Optional starting prompt for evolution. Examples:

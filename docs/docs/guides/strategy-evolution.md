@@ -52,6 +52,10 @@ Use a 2% stop loss from entry and target 3:1 reward-to-risk."
 - **Support/resistance**: Key price levels
 - **Recent price action**: Candlestick patterns, momentum
 
+Configure which indicators are active per run in the UI or via config:
+
+- [Indicators guide](/guides/indicators)
+
 ## Phase 2: Backtesting
 
 Each strategy is tested against historical market data:
