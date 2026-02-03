@@ -11,7 +11,22 @@ const sidebars = {
       items: [
         'installation/macos',
         'installation/windows',
-        'installation/cli',
+        {
+          type: 'category',
+          label: 'CLI',
+          items: [
+            'installation/cli/overview',
+            'installation/cli/setup',
+            'installation/cli/backtest',
+            'installation/cli/montecarlo',
+            'installation/cli/evolve',
+            'installation/cli/live',
+            'installation/cli/trades',
+            'installation/cli/history',
+            'installation/cli/coverage',
+            'installation/cli/assets',
+          ],
+        },
       ],
     },
     {

@@ -11,6 +11,10 @@ Gopher uses Large Language Models (LLMs) to autonomously discover, test, and evo
 
 > **New to Gopher?** The [CLI](/installation/cli) is the recommended way to use Gopher. It's always the most up-to-date and includes features like live trading that haven't yet reached the desktop apps.
 
+:::tip CLI Reference Shortcuts
+Jump straight to: [Overview](/installation/cli), [backtest](/installation/cli/backtest), [montecarlo](/installation/cli/montecarlo), [evolve](/installation/cli/evolve), [live](/installation/cli/live), [trades](/installation/cli/trades), [history](/installation/cli/history), [coverage](/installation/cli/coverage), [assets](/installation/cli/assets), [setup](/installation/cli/setup).
+:::
+
 ## Key Features
 
 ### Autonomous Strategy Discovery
