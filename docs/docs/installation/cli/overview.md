@@ -174,15 +174,15 @@ Gopher stores configuration in `~/Documents/Gopher/`:
 
 Use `gopher <command> --help` for detailed usage of each command.
 
-- [setup](./setup)
-- [evolve](./evolve)
-- [backtest](./backtest)
-- [montecarlo](./montecarlo)
-- [live](./live)
-- [trades](./trades)
-- [history](./history)
-- [coverage](./coverage)
-- [assets](./assets)
+- [setup](/installation/cli/setup)
+- [evolve](/installation/cli/evolve)
+- [backtest](/installation/cli/backtest)
+- [montecarlo](/installation/cli/montecarlo)
+- [live](/installation/cli/live)
+- [trades](/installation/cli/trades)
+- [history](/installation/cli/history)
+- [coverage](/installation/cli/coverage)
+- [assets](/installation/cli/assets)
 
 ## Quick Start
 
