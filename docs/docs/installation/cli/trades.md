@@ -1,5 +1,6 @@
 ---
 sidebar_position: 7
+slug: /installation/cli/trades
 ---
 
 # trades
